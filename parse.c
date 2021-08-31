@@ -6,7 +6,7 @@
 /*   By: minsunki <minsunki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/31 11:14:43 by minsunki          #+#    #+#             */
-/*   Updated: 2021/08/31 16:24:17 by minsunki         ###   ########seoul.kr  */
+/*   Updated: 2021/08/31 19:33:31 by minsunki         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,6 @@
 
 static int	validate_int(char *s)
 {
-	int	has_dig;
-
-	has_dig = 0;
 	while (*s == ' ')
 		s++;
 	if (*s == '+' || *s == '-')
@@ -24,12 +21,15 @@ static int	validate_int(char *s)
 	if (!*s)
 		return (0);
 	while (*s)
-		if (!ft_isdigit(*s++))
+	{
+		if (!ft_isdigit(*s) && *s != ' ')
 			return (0);
+		s++;
+	}
 	return (1);
 }
 
-static int	ref_sort(int *arr, int size)
+static void	ref_sort(int *arr, int size)
 {
 	int			i;
 	int			j;

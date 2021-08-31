@@ -6,7 +6,7 @@
 /*   By: minsunki <minsunki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/09 14:03:12 by minsunki          #+#    #+#             */
-/*   Updated: 2021/08/31 16:25:46 by minsunki         ###   ########seoul.kr  */
+/*   Updated: 2021/08/31 17:32:52 by minsunki         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void	solve(t_meta *m)
 		sort_chunk(m);
 		max_idx = min_idx - 1;
 	}
-	rp = cc_rpos(m->a, cc_min(m->a));
+	rp = cc_rpos(m->a, 0);
 	if (rp < 0)
 		com_n(C_RRA, -rp);
 	else

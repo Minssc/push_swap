@@ -6,7 +6,7 @@
 /*   By: minsunki <minsunki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/31 13:52:14 by minsunki          #+#    #+#             */
-/*   Updated: 2021/08/31 16:25:27 by minsunki         ###   ########seoul.kr  */
+/*   Updated: 2021/08/31 17:48:48 by minsunki         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ static int	get_lower_bound(t_ccon *a, int n)
 	return (v);
 }
 
-static void	push_back(t_meta *m)
+void	push_back(t_meta *m)
 {
 	int	pval;
 	int	ppos;

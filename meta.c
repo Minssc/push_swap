@@ -6,25 +6,29 @@
 /*   By: minsunki <minsunki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/09 14:07:23 by minsunki          #+#    #+#             */
-/*   Updated: 2021/08/31 16:15:52 by minsunki         ###   ########seoul.kr  */
+/*   Updated: 2021/08/31 17:22:05 by minsunki         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static void	meta_destroy(void)
+void	meta_destroy(void)
 {
 	t_meta			*m;
 
 	m = get_meta();
-	ft_dlstclear(m->a, free);
-	ft_dlstclear(m->b, free);
 	if (m->ref)
 		free(m->ref);
 	if (m->a)
+	{
+		ft_dlstclear(&m->a->head, free);
 		free(m->a);
+	}
 	if (m->b)
+	{
+		ft_dlstclear(&m->b->head, free);
 		free(m->b);
+	}
 }
 
 void	perror_exit(char *estr)

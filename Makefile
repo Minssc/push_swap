@@ -6,7 +6,7 @@
 #    By: minsunki <minsunki@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/06/06 16:16:22 by minsunki          #+#    #+#              #
-#    Updated: 2021/08/31 14:15:20 by minsunki         ###   ########seoul.kr   #
+#    Updated: 2021/08/31 19:09:14 by minsunki         ###   ########seoul.kr   #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,12 +20,13 @@ FIL_M		=	push_swap.c \
 				ccon.c \
 				ccon_util.c \
 				ps_func.c \
-				solve.c 
+				solve.c \
+				solve_small.c
 
 OBJ_M		=	$(FIL_M:.c=.o)
 
 CC			=	gcc
-CFLAG		=	#-Wall -Wextra -Werror
+CFLAG		=	-Wall -Wextra -Werror
 CFLAG_EXT	=	-Llibft -lft
 RM			=	rm -f
 MAKE		=	make

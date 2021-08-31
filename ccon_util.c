@@ -6,7 +6,7 @@
 /*   By: minsunki <minsunki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/31 12:45:02 by minsunki          #+#    #+#             */
-/*   Updated: 2021/08/31 16:21:54 by minsunki         ###   ########seoul.kr  */
+/*   Updated: 2021/08/31 17:27:39 by minsunki         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,4 +77,20 @@ int	cc_rpos(t_ccon *c, int val)
 		return (front);
 	else
 		return (-back);
+}
+
+int	cc_is_sorted(t_ccon *c)
+{
+	int		idx;
+	t_dlist	*cur;
+
+	cur = c->head;
+	idx = -1;
+	while (cur)
+	{
+		if (++idx != *(int *)cur->content)
+			return (0);
+		cur = cur->next;
+	}
+	return (1);
 }
