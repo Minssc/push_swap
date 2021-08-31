@@ -6,18 +6,21 @@
 #    By: minsunki <minsunki@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/06/06 16:16:22 by minsunki          #+#    #+#              #
-#    Updated: 2021/06/12 18:29:22 by minsunki         ###   ########.fr        #
+#    Updated: 2021/08/31 14:15:20 by minsunki         ###   ########seoul.kr   #
 #                                                                              #
 # **************************************************************************** #
 
 NAME		=	push_swap
 
 FIL_M		=	push_swap.c \
+				sort_chunk.c \
+				command.c \
+				parse.c \
 				meta.c \
 				ccon.c \
+				ccon_util.c \
 				ps_func.c \
-				solve.c \
-				optimize.c 
+				solve.c 
 
 OBJ_M		=	$(FIL_M:.c=.o)
 
@@ -50,8 +53,7 @@ re			:	fclean
 				$(MAKE) all
 
 test		:	re
+			$(MAKE) clean
 			./$(NAME) 2 1 3 6 5 8
-			echo ""
-			./$(NAME) 1 2 3 4 6 5
 
 .PHONY		:	all clean fclean re bonus

@@ -6,7 +6,7 @@
 /*   By: minsunki <minsunki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/11 18:41:06 by minsunki          #+#    #+#             */
-/*   Updated: 2021/07/07 09:21:36 by minsunki         ###   ########.fr       */
+/*   Updated: 2021/08/31 16:17:23 by minsunki         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,10 @@ void	cc_push(t_ccon *c, int v)
 	new = ft_dlstnew(dai);
 	if (!new)
 		perror_exit("ft_dlstnew failed @cc_push for new");
-	ft_dlstins_back(&c->tail, new);
-	c->tail = new;
-	if (!c->head)
-		c->head = c->tail;
+	ft_dlstins_front(&c->head, new);
+	c->head = new;
+	if (!c->tail)
+		c->tail = c->head;
 }
 
 void	cc_pop(t_ccon *c)
@@ -59,4 +59,20 @@ int	cc_next(t_ccon *c)
 	if (c->size < 2)
 		perror_exit("cc_next called on t_ccon with element# < 2");
 	return (*(int *)c->head->next->content);
+}
+
+int	cc_max(t_ccon *c)
+{
+	int		max;
+	t_dlist	*cur;
+
+	cur = c->head;
+	max = *(int *)cur->content;
+	while (cur)
+	{
+		if (*(int *)cur->content > max)
+			max = *(int *)cur->content;
+		cur = cur->next;
+	}
+	return (max);
 }

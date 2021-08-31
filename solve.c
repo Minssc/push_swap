@@ -6,74 +6,54 @@
 /*   By: minsunki <minsunki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/09 14:03:12 by minsunki          #+#    #+#             */
-/*   Updated: 2021/07/07 09:24:38 by minsunki         ###   ########.fr       */
+/*   Updated: 2021/08/31 16:25:46 by minsunki         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static void	pdlst(t_dlist *lst)//dbg func
+static void	push_element(t_meta *m, int min, int max)
 {
-	t_dlist		*cur = lst;
+	int	front;
+	int	back;
 
-	while (cur)
-	{
-		printf("%d ",*(int *)cur->content);
-		cur = cur->next;
-	}
-	printf("\n");
+	front = cc_search_front(m->a, min, max);
+	back = cc_search_back(m->a, min, max) + 1;
+	if (front < back)
+		com_n(C_RA, front);
+	else
+		com_n(C_RRA, back);
+	com(C_PB);
 }
 
-static void	pall(t_meta *m)
+static void	push_chunk(t_meta *m, int min, int max)
 {
-	printf("a: ");
-	pdlst(m->a->head);
-	printf("b: ");
-	pdlst(m->b->head);
-}
+	int	i;
 
-void	cl_add(t_dlist **cl, int com)
-{
-	int			*dai;
-	t_dlist		*new;
-
-	dai = (int *)malloc(sizeof(int));
-	if (!dai)
-		perror_exit("malloc failed @cl_add for dai");
-	*dai = com;
-	new = ft_dlstnew(dai);
-	if (!new)
-		perror_exit("ft_dlstnew failed @cl_add for new");
-	ft_dlstins_back(cl, new);
-	*cl = new;
+	i = -1;
+	while (++i < (max - min + 1))
+		push_element(m, min, max);
 }
 
 void	solve(t_meta *m)
 {
-	int			curv;
-	int			nexv;
-	int			com;
+	int	chunks;
+	int	max_idx;
+	int	min_idx;
+	int	rp;
 
-	while (m->a->size)
+	chunks = m->size / CHUNK_SIZE + 1;
+	max_idx = cc_max(m->a);
+	while (--chunks >= 0)
 	{
-		com = 0;
-		curv = cc_top(m->a);
-		if (curv == m->ref[m->b->size])
-			com = ps_push(m->a, m->b) | C_PB;
-		else if (m->a->size > 1)
-		{
-			nexv = cc_next(m->a);
-			if (curv > nexv)
-				com = ps_swap(m->a) | C_SA;
-		}
-		if (!com && *(int *)m->a->tail->content == m->ref[m->b->size])
-			com = ps_revrot(m->a) | C_RRA;
-		if (!com)
-			com = ps_rotate(m->a) | C_RA;
-		cl_add(&m->cl, com);
+		min_idx = ft_maxi(max_idx - CHUNK_SIZE, 0);
+		push_chunk(m, min_idx, max_idx);
+		sort_chunk(m);
+		max_idx = min_idx - 1;
 	}
-	com = m->b->size;
-	while (com--)
-		cl_add(&m->cl, C_PA);
-	optimize(m);
+	rp = cc_rpos(m->a, cc_min(m->a));
+	if (rp < 0)
+		com_n(C_RRA, -rp);
+	else
+		com_n(C_RA, rp);
 }

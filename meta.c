@@ -6,7 +6,7 @@
 /*   By: minsunki <minsunki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/09 14:07:23 by minsunki          #+#    #+#             */
-/*   Updated: 2021/07/07 09:23:11 by minsunki         ###   ########.fr       */
+/*   Updated: 2021/08/31 16:15:52 by minsunki         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,18 +17,24 @@ static void	meta_destroy(void)
 	t_meta			*m;
 
 	m = get_meta();
-	//ft_qclear(m->a, free);
-	//ft_qclear(m->b, free);
-	ft_dlstclear(&m->cl, free);
+	ft_dlstclear(m->a, free);
+	ft_dlstclear(m->b, free);
 	if (m->ref)
 		free(m->ref);
+	if (m->a)
+		free(m->a);
+	if (m->b)
+		free(m->b);
 }
 
 void	perror_exit(char *estr)
 {
-	ft_putstr_fd("Error\n", 1);
-	ft_putstr_fd(estr, 1);
-	ft_putstr_fd("\n", 1);
+	ft_putstr_fd("Error\n", 2);
+	if (FT_DBG)
+	{
+		ft_putstr_fd(estr, 2);
+		ft_putstr_fd("\n", 2);
+	}
 	meta_destroy();
 	exit(1);
 }
